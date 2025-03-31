@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" data-framework="javascript">
+<html lang="zh-CN" data-framework="javascript">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0">
-    <meta name="description" content="A conversational AI system that listens, learns, and challenges">
+    <meta name="description" content="一个会聆听、学习和挑战的对话人工智能系统">
     <meta property="og:title" content="ChatGPT">
     <meta property="og:image" content="https://openai.com/content/images/2022/11/ChatGPT.jpg">
-    <meta property="og:description" content="A conversational AI system that listens, learns, and challenges">
+    <meta property="og:description" content="一个会聆听、学习和挑战的对话人工智能系统">
     <meta property="og:url" content="https://g4f.ai">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/all.min.css">
@@ -67,7 +67,7 @@
         window.share_url = "{{share_url}}";
         window.start_id = "{{conversation_id}}";
     </script>
-    <title>G4F Chat</title>
+    <title>G4F 聊天界面</title>
 </head>
 <body>
     <script async>
@@ -78,22 +78,22 @@
             <div class="top">
                 <button class="new_convo" onclick="new_conversation()">
                     <i class="fa-regular fa-plus"></i>
-                    <span>New Conversation</span>
+                    <span>开始新对话</span>
                 </button>
             </div>
             <div class="bottom_buttons">
                 <button onclick="open_settings();">
                     <i class="fa-solid fa-toolbox"></i>
-                    <span>Open Settings</span>
+                    <span>打开设置</span>
                 </button>
                 <div class="info">
                     <i class="fa-brands fa-discord"></i>
-                    <span class="convo-title">discord ~ <a href="https://discord.gg/qXA4Wf4Fsm" target="_blank">discord.gg/qXA4Wf4Fsm</a>
+                    <span class="convo-title">Discord ~ <a href="https://discord.gg/qXA4Wf4Fsm" target="_blank">discord.gg/qXA4Wf4Fsm</a>
                     </span>
                 </div>
                 <div class="info">
                     <i class="fa-brands fa-github"></i>
-                    <span class="convo-title">github ~ <a href="https://github.com/xtekky/gpt4free" target="_blank">@xtekky/gpt4free</a>
+                    <span class="convo-title">GitHub ~ <a href="https://github.com/xtekky/gpt4free" target="_blank">@xtekky/gpt4free</a>
                     </span>
                 </div>
                 <div class="info">
@@ -104,76 +104,81 @@
         </div>
         <div class="settings hidden">
             <div class="paper">
-            <h3>Settings</h3>
+            <h3>设置</h3>
             <div class="field">
-                <span class="label">Enable Dark Mode</span>
+                <span class="label">启用深色模式</span>
                 <input type="checkbox" id="darkMode" checked />
                 <label for="darkMode" class="toogle" title=""></label>
             </div>
             <div class="field">
-                <span class="label">Web Access with DuckDuckGo</span>
+                <span class="label">使用DuckDuckGo网络访问</span>
                 <input type="checkbox" id="switch" />
-                <label for="switch" class="toogle" title="Add the pages of the first 5 search results to the query."></label>
+                <label for="switch" class="toogle" title="将前5个搜索结果的页面添加到查询中"></label>
             </div>
             <div class="field">
-                <span class="label">Disable Conversation History</span>
+                <span class="label">禁用对话历史</span>
                 <input type="checkbox" id="history" />
-                <label for="history" class="toogle" title="To improve the reaction time or if you have trouble with large conversations."></label>
+                <label for="history" class="toogle" title="改善反应时间或解决大型对话问题"></label>
             </div>
             <div class="field">
-                <span class="label">Hide System-prompt</span>
+                <span class="label">隐藏系统提示</span>
                 <input type="checkbox" id="hide-systemPrompt" />
-                <label for="hide-systemPrompt" class="toogle" title="For more space on phones"></label>
+                <label for="hide-systemPrompt" class="toogle" title="在手机上获得更多空间"></label>
             </div>
             <div class="field">
-                <span class="label">Download generated media</span>
+                <span class="label">下载生成的媒体</span>
                 <input type="checkbox" id="download_media" checked/>
-                <label for="download_media" class="toogle" title="Download and save generated images, audios and videos"></label>
+                <label for="download_media" class="toogle" title="下载并保存生成的图像、音频和视频"></label>
             </div>
             <div class="field">
-                <span class="label">Refine files with spaCy</span>
+                <span class="label">使用spaCy优化文件</span>
                 <input type="checkbox" id="refine"/>
                 <label for="refine" class="toogle" title=""></label>
             </div>
             <div class="field">
-                <span class="label">Track usage</span>
+                <span class="label">使用发送快捷键</span>
+                <input type="checkbox" id="send_shortcut" checked/>
+                <label for="send_shortcut" class="toogle" title="使用Ctrl+Enter快捷键发送"></label>
+            </div>
+            <div class="field">
+                <span class="label">跟踪使用情况</span>
                 <input type="checkbox" id="track_usage"/>
                 <label for="track_usage" class="toogle" title=""></label>
             </div>
             <div class="field">
-                <span class="label">Report errors</span>
+                <span class="label">报告错误</span>
                 <input type="checkbox" id="report_error" checked/>
                 <label for="report_error" class="toogle" title=""></label>
             </div>
             <div class="field">
-                <span class="label">Count words and tokens</span>
+                <span class="label">计算单词和令牌数</span>
                 <input type="checkbox" id="countTokens" checked/>
                 <label for="countTokens" class="toogle" title=""></label>
             </div>
             <div class="field">
-                <span class="label">Automatic Orientation (16:9 or 9:16)</span>
+                <span class="label">自动方向（16:9 或 9:16）</span>
                 <input type="checkbox" id="automaticOrientation" checked/>
                 <label for="automaticOrientation" class="toogle" title=""></label>
             </div>
             <div class="field box">
-                <label for="systemPrompt" class="label">System prompt</label>
-                <textarea id="systemPrompt" placeholder="You are a helpful assistant." data-example="If you need to generate images, you can use the following format: ![keywords](/generate/filename.jpg). This will enable the use of an image generation tool."></textarea>
+                <label for="systemPrompt" class="label">系统提示</label>
+                <textarea id="systemPrompt" placeholder="你是一个有帮助的助手。" data-example="如果你需要生成图片，可以使用以下格式：![关键词](/generate/filename.jpg)。这将启用图像生成工具。"></textarea>
             </div>
             <div class="field box">
-                <label for="userInput-height" class="label" title="">Input max. height</label>
+                <label for="userInput-height" class="label" title="">输入框最大高度</label>
                 <input type="number" id="userInput-height" value="200"/>
             </div>
             <div class="field box">
-                <label for="recognition-language" class="label" title="">Speech recognition language</label>
+                <label for="recognition-language" class="label" title="">语音识别语言</label>
                 <input type="text" id="recognition-language" value="" placeholder="navigator.language"/>
             </div>
             <div class="field mem0 hidden">
-                <span class="label">Enable Memory with Mem0</span>
+                <span class="label">使用Mem0启用记忆</span>
                 <input type="checkbox" id="mem0"/>
                 <label for="mem0" class="toogle" title=""></label>
                 <button onclick="import_memory()">
-                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                    <span>Import Messages to Mem0</span>
+                    <span>导入记忆</span>
+                    <i class="fa-regular fa-file-import"></i>
                 </button>
             </div>
             <div class="field box hidden">
@@ -189,26 +194,30 @@
                 <input type="text" id="Custom-api_key" name="Custom[api_key]" placeholder="api_key"/>
             </div>
             <div class="field box hidden">
-                <label for="BingCreateImages-api_key" class="label" title="">Microsoft Designer in Bing:</label>
+                <label for="BingCreateImages-api_key" class="label" title="">必应设计师API：</label>
                 <input type="text" id="BingCreateImages-api_key" name="BingCreateImages[api_key]" placeholder="&quot;_U&quot; cookie"/>
+            </div>
+            <div class="collapsible-header">
+                <span class="label">提供商（启用/禁用）</span>
+                <i class="fa-solid fa-chevron-down"></i>
             </div>
             </div>
             <div class="bottom_buttons">
                 <button onclick="delete_conversations()">
                     <i class="fa-solid fa-trash"></i>
-                    <span>Clear Conversations</span>
+                    <span>清除所有对话</span>
                 </button>
                 <button onclick="save_storage()">
                     <i class="fa-solid fa-download"></i>
-                    <a href="" onclick="return false;">Export Conversations</a>
+                    <a href="" onclick="return false;">导出对话</a>
                 </button>
                 <button onclick="save_storage(true)">
                     <i class="fa-solid fa-pencil"></i>
-                    <a href="" onclick="return false;">Export Settings</a>
+                    <a href="" onclick="return false;">导出设置</a>
                 </button>
                 <button id="showLog">
                     <i class="fa-solid fa-terminal"></i>
-                    <a href="" onclick="return false;">Show log</a>
+                    <a href="" onclick="return false;">显示日志</a>
                 </button>
             </div>
         </div>
@@ -216,15 +225,15 @@
             <div class="bottom_buttons">
                 <button id="close_provider_forms">
                     <i class="fa-regular fa-circle-xmark"></i>
-                    <a href="" onclick="return false;">Close</a>
+                    <a href="" onclick="return false;">关闭</a>
                 </button>
             </div>
         </div>
         <div class="chat-container">
             <div class="chat-header box">
-                G4F Chat
+                G4F 聊天
             </div>
-            <textarea id="chatPrompt" class="box" placeholder="System prompt"></textarea>
+            <textarea id="chatPrompt" class="box" placeholder="系统提示"></textarea>
             <button class="slide-header">
                 <i class="fa-solid fa-angles-up"></i>
             </button>
@@ -236,17 +245,17 @@
                             <i class="fa-solid fa-angles-down"></i>
                         </button>
                         <input type="checkbox" id="agree" name="agree" value="yes" checked>
-                        <label for="agree" class="text" onclick="this.innerText='';">Scroll to bottom</label>
+                        <label for="agree" class="text" onclick="this.innerText='';">滚动到底部</label>
                     </div>
                     <div class="stop_generating stop_generating-hidden">
                         <button id="cancelButton">
-                            <span>Stop Generating</span>
+                            <span>停止生成</span>
                             <i class="fa-solid fa-stop"></i>
                         </button>
                     </div>
                     <div class="regenerate">
                         <button id="regenerateButton">
-                            <span>Regenerate</span>
+                            <span>重新生成</span>
                             <i class="fa-solid fa-rotate"></i>
                         </button>
                     </div>
@@ -269,7 +278,7 @@
                 </div>
                 <div class="user-input">
                     <div class="input-area">
-                        <textarea id="userInput" class="box" placeholder="Type a message..." cols="30" rows="10"
+                        <textarea id="userInput" class="box" placeholder="输入消息..." cols="30" rows="10"
                             style="white-space: pre-wrap;resize: none;"></textarea>
                         <label class="file-label image-label">
                             <i class="fa-regular fa-image"></i>
@@ -284,12 +293,12 @@
                         <div class="send-buttons">
                             <button id="addButton">
                                 <i class="fa-solid fa-square-plus"></i>
-                                Add
+                                添加
                             </button>
                             <button id="sendButton">
                                 <i class="fa-regular fa-paper-plane"></i>
                                 <a href="" id="download" class="hidden"></a>
-                                Send
+                                发送
                             </button>
                         </div>
                     </div>
@@ -302,29 +311,29 @@
                     </div>
                    <div class="field">
                       <select name="model" id="model">
-                         <option value="" selected="selected">Model: Default</option>
+                         <option value="" selected="selected">模型: 默认</option>
                          <option value="gpt-4">gpt-4</option>
                          <option value="gpt-4o">gpt-4o</option>
                          <option value="gpt-4o-mini">gpt-4o-mini</option>
                          <option value="llama-3.1-70b">llama-3.1-70b</option>
                          <option value="mixtral-8x7b">mixtral-8x7b</option>
                          <option value="claude-3.5-sonnet">claude-3.5-sonnet</option>
-                         <option value="flux">flux (Image Generation)</option>
-                         <option value="dall-e-3">dall-e-3 (Image Generation)</option>
+                         <option value="flux">flux (图像生成)</option>
+                         <option value="dall-e-3">dall-e-3 (图像生成)</option>
                          <option disabled="disabled">----</option>
                       </select>
                       <select name="model2" id="model2" class="hidden model"></select>
-                      <input type="text" id="model3" value="" class="hidden model" placeholder="Model:"/>
+                      <input type="text" id="model3" value="" class="hidden model" placeholder="模型:"/>
                    </div>
                    <div class="field">
                       <select name="provider" id="provider">
-                         <option value="">Provider: Auto</option>
+                         <option value="">供应商: 自动</option>
                          <option value="OpenaiChat">OpenAI ChatGPT</option>
                          <option value="Copilot">Microsoft Copilot</option>
                          <option value="Gemini">Google Gemini</option>
-                         <option value="DDG">DuckDuckGo AI Chat</option>
+                         <option value="DDG">DuckDuckGo AI 聊天</option>
                          <option value="Blackbox">Blackbox AI</option>
-                         <option value="Custom Model">Custom Model</option>
+                         <option value="Custom Model">自定义模型</option>
                          <option disabled="disabled">----</option>
                         </select>
                     </div>

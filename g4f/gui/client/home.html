@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G4F GUI</title>
+    <title>G4F 用户界面</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/static/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon-16x16.png">
@@ -152,26 +151,26 @@
 <body>
     <iframe id="background" src="/background"></iframe>
 
-    <!-- Main Content -->
+    <!-- 主要内容 -->
     <div class="container">
         <header>
-            G4F GUI
+            G4F 用户界面
         </header>
         <div class="description">
-            Welcome to the G4F GUI! <br>
-            Your AI assistant is ready to assist you.
+            欢迎使用G4F用户界面！<br>
+            您的AI助手已准备好为您提供帮助。
         </div>
 
-        <!-- Input and Button -->
+        <!-- 输入框和按钮 -->
         <form action="/chat/">
-            <input type="text" name="prompt" class="input-field" placeholder="Enter your query...">
-            <button class="button">Open Chat</button>
+            <input type="text" name="prompt" class="input-field" placeholder="请输入您的问题...">
+            <button class="button">打开聊天</button>
         </form>
 
-        <!-- Footer -->
+        <!-- 底部 -->
         <div class="footer">
-            <p>&copy; 2025 G4F. All Rights Reserved.</p>
-            <p>Powered by the G4F framework</p>
+            <p>&copy; 2025 G4F. 保留所有权利。</p>
+            <p>由G4F框架提供支持</p>
         </div>
 
         <iframe class="stream-widget" frameborder="0"></iframe>
@@ -182,14 +181,15 @@
         if (rand_idx < 3) {
             search = "xtekky/gpt4free releases";
         } else if (rand_idx < 6) {
-            search = "developer news";
+            search = "开发者新闻";
         } else {
-            search = (navigator.language == "de" ? "news in deutsch" : navigator.language == "en" ? "world news" : `news in ${navigator.language}`);
+            search = (navigator.language == "de" ? "德语新闻" : navigator.language == "en" ? "世界新闻" : `${navigator.language}语言新闻`);
         }
-        const summary_prompt = "Present the news from the search results in a clear and organized markdown format. Include a headline, a brief summary, key points, and one or more relevant images with proper attribution. Ensure the content is concise, well-structured, and visually appealing.";
+        const summary_prompt = "请以清晰有组织的markdown格式呈现搜索结果中的新闻。包括标题、简要摘要、要点和一个或多个相关图片（附带适当的来源标注）。确保内容简洁、结构良好且视觉效果吸引人。";
+
         const url = `/backend-api/v2/create?prompt=${summary_prompt}&stream=1&web_search=${search}`;
         iframe.src = url;
-        const message = "Loading...";
+        const message = "加载中...";
         setTimeout(()=>{
             iframe.classList.add('show');
             const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;

@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G4F DEMO</title>
+    <title>G4F 演示界面</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/static/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon-16x16.png">
@@ -183,113 +182,110 @@
         <i class="fa-solid fa-arrow-left"></i>
     </button>
 
-    <!-- Main Content -->
+    <!-- 主要内容 -->
     <div class="container">
         <header>
-            G4F DEMO
+            G4F 演示
         </header>
         <div class="description">
-            Welcome to the G4F Web UI! <br>
-            Your AI assistant is ready to assist you.
+            欢迎使用G4F演示！<br>
+            这是一个由G4F框架提供支持的AI助手。
         </div>
 
-        <!-- Input and Button -->
-        <form action="/chat/">
-            <input type="text" name="token" class="input-field" placeholder="Enter an Access Token..." autocomplete="off">
-            <div class="button-container">
-                <a id="new_window" href="" class="button hidden" target="_blank">New Window</a>
-                <button class="button">Submit</button>
-            </div>
-            <p>
-                <a href="https://huggingface.co/settings/tokens" target="_blank">Get Access Token</a>
-            </p>
-            <img src="https://huggingface.co/datasets/huggingface/badges/resolve/main/sign-in-with-huggingface-xl-dark.svg" alt="Sign in with Hugging Face" style="cursor: pointer; display: none;" id="signin">
-            <button id="signout" style="display: none">Sign out</button>
+        <!-- 登录表单 -->
+        <form id="loginForm" class="hidden">
+            <input type="text" id="accessToken" class="input-field" placeholder="请输入HuggingFace访问令牌...">
+            <button class="button" type="submit">登录</button>
         </form>
-        <script type="module">
-            import * as hub from "@huggingface/hub";
-            import { oauthLoginUrl, oauthHandleRedirectIfPresent } from "@huggingface/hub";
 
-            const isIframe = window.self !== window.top;
-            const button = document.querySelector('form a.button');
-            if (isIframe) {
-                button.classList.remove('hidden');
-            }
+        <div class="button-container">
+            <button id="signin" class="button" style="display: none;">使用HuggingFace登录</button>
+            <button id="signout" class="button" style="display: none;">登出</button>
+        </div>
 
-            const form = document.querySelector("form");
-            const input = document.querySelector('form input[name="token"]');
-            async function check_access_token() {
-                const accessToken = input.value || localStorage.getItem("HuggingFace-api_key");
-                if (!accessToken) {
-                    return;
-                }
-                let user;
-                try {
-                    user = await hub.whoAmI({accessToken: accessToken});
-                } catch(e) {
-                    console.log(e);
-                    input.setCustomValidity("Invalid Access Token.");
-                    localStorage.removeItem("HuggingFace-api_key");
-                    if (localStorage.getItem("oauth")) {
-                        localStorage.removeItem("oauth");
-                        window.location.replace("/");
-                    }
-                    return;
-                }
-                localStorage.setItem("HuggingFace-api_key", accessToken);
-                localStorage.setItem("user", user.name);
-                localStorage.setItem("report_error", "true")
-                location.href = "/chat/";
-            }
-            input.addEventListener("input", () => check_access_token());
-            input.addEventListener("click", () => check_access_token());
-            form.addEventListener("submit", async (event) => {
-                event.preventDefault();
-                check_access_token();
-            });
-
-            let oauthResult = localStorage.getItem("oauth");
-            if (oauthResult) {
-                let user;
-                try {
-                    oauthResult = JSON.parse(oauthResult);
-                    user = await hub.whoAmI({accessToken: oauthResult.accessToken});
-                } catch (e) {
-                    console.error(e);
-                    oauthResult = null;
-                    localStorage.removeItem("oauth");
-                    localStorage.removeItem("HuggingFace-api_key");
-                }
-            }
-            oauthResult ||= await oauthHandleRedirectIfPresent();
-            if (oauthResult) {
-                localStorage.setItem("oauth", JSON.stringify(oauthResult));
-                localStorage.setItem("HuggingFace-api_key", oauthResult.accessToken);
-                localStorage.setItem("user", oauthResult.userInfo.fullname);
-                document.getElementById("signout").style.removeProperty("display");
-                document.getElementById("signout").onclick = async function() {
-                    localStorage.removeItem("oauth");
-                    localStorage.removeItem("HuggingFace-api_key");
-                    window.location.replace("/");
-                }
-            } else {
-                localStorage.removeItem("oauth");
-                document.getElementById("signin").style.removeProperty("display");
-                document.getElementById("signin").onclick = async function() {
-                    window.location.href = (await oauthLoginUrl({
-                        clientId: '{{client_id}}',
-                        scopes: ['inference-api']
-                    }));
-                }
-            }
-        </script>
-
-        <!-- Footer -->
+        <!-- 底部 -->
         <div class="footer">
-            <p>&copy; 2025 G4F. All Rights Reserved.</p>
-            <p>Powered by the G4F framework</p>
+            <p>&copy; 2025 G4F. 保留所有权利。</p>
+            <p>由G4F框架提供支持</p>
         </div>
     </div>
+    <script type="module">
+        import * as hub from "@huggingface/hub";
+        import { oauthLoginUrl, oauthHandleRedirectIfPresent } from "@huggingface/hub";
+
+        const isIframe = window.self !== window.top;
+        const button = document.querySelector('form a.button');
+        if (isIframe) {
+            button.classList.remove('hidden');
+        }
+
+        const form = document.querySelector("form");
+        const input = document.querySelector('form input[name="token"]');
+        async function check_access_token() {
+            const accessToken = input.value || localStorage.getItem("HuggingFace-api_key");
+            if (!accessToken) {
+                return;
+            }
+            let user;
+            try {
+                user = await hub.whoAmI({accessToken: accessToken});
+            } catch(e) {
+                console.log(e);
+                input.setCustomValidity("Invalid Access Token.");
+                localStorage.removeItem("HuggingFace-api_key");
+                if (localStorage.getItem("oauth")) {
+                    localStorage.removeItem("oauth");
+                    window.location.replace("/");
+                }
+                return;
+            }
+            localStorage.setItem("HuggingFace-api_key", accessToken);
+            localStorage.setItem("user", user.name);
+            localStorage.setItem("report_error", "true")
+            location.href = "/chat/";
+        }
+        input.addEventListener("input", () => check_access_token());
+        input.addEventListener("click", () => check_access_token());
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            check_access_token();
+        });
+
+        let oauthResult = localStorage.getItem("oauth");
+        if (oauthResult) {
+            let user;
+            try {
+                oauthResult = JSON.parse(oauthResult);
+                user = await hub.whoAmI({accessToken: oauthResult.accessToken});
+            } catch (e) {
+                console.error(e);
+                oauthResult = null;
+                localStorage.removeItem("oauth");
+                localStorage.removeItem("HuggingFace-api_key");
+            }
+        }
+        oauthResult ||= await oauthHandleRedirectIfPresent();
+        if (oauthResult) {
+            localStorage.setItem("oauth", JSON.stringify(oauthResult));
+            localStorage.setItem("HuggingFace-api_key", oauthResult.accessToken);
+            localStorage.setItem("user", oauthResult.userInfo.fullname);
+            document.getElementById("signout").style.removeProperty("display");
+            document.getElementById("signout").onclick = async function() {
+                localStorage.removeItem("oauth");
+                localStorage.removeItem("HuggingFace-api_key");
+                window.location.replace("/");
+            }
+        } else {
+            localStorage.removeItem("oauth");
+            document.getElementById("signin").style.removeProperty("display");
+            document.getElementById("signin").onclick = async function() {
+                window.location.href = (await oauthLoginUrl({
+                    clientId: '{{client_id}}',
+                    scopes: ['inference-api']
+                }));
+            }
+        }
+    </script>
     <script>
         (async () => {
             const today = new Date().toJSON().slice(0, 10);
@@ -298,11 +294,11 @@
             if (cache_id > 3) {
                 let prompt;
                 if (cache_id % 2 == 0) {
-                    prompt = `Today is ${new Date().toJSON().slice(0, 10)}.
-                    Create a single-page HTML screensaver reflecting the current season (based on the date).
-                    Avoid using any text.`;
+                    prompt = `今天是${new Date().toJSON().slice(0, 10)}。
+                    创建一个反映当前季节（基于日期）的单页HTML屏幕保护程序。
+                    避免使用任何文本。`;
                 } else {
-                    prompt = `Create a single-page HTML screensaver. Avoid using any text.`;
+                    prompt = `创建一个单页HTML屏幕保护程序。避免使用任何文本。`;
                 }
                 const response = await fetch(`/backend-api/v2/create?prompt=${prompt}&filter_markdown=html&cache=${cache_id}`);
                 const text = await response.text()

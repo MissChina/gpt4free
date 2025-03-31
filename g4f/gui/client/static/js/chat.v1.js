@@ -2421,7 +2421,7 @@ async function on_api() {
     providersListContainer.classList.add("field", "collapsible");
     providersListContainer.innerHTML = `
         <div class="collapsible-header">
-            <span class="label">Providers API key</span>
+            <span class="label">提供商API密钥</span>
             <i class="fa-solid fa-chevron-down"></i>
         </div>
         <div class="collapsible-content api-key hidden"></div>

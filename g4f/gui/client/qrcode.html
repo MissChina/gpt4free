@@ -1,47 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Scanner and QR Code Generator</title>
+    <title>二维码生成与扫描</title>
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
-        video { width: 400px; height: 400px; border: 1px solid black; display: block; margin: auto; object-fit: cover; max-width: 100%;}
+        video { width: 400px; height: 400px; border: 1px solid black; display: block; margin: auto; object-fit: cover; max-width: 100%; }
         #qrcode { margin-top: 20px; }
-        #qrcode img, #qrcode canvas { margin: 0 auto; width: 400px; height: 400px; max-width: 100%;}
+        #qrcode img, #qrcode canvas { margin: 0 auto; width: 400px; height: 400px; max-width: 100%; }
         button { margin: 5px; padding: 10px; }
     </style>
 </head>
 <body>
-
-    <h1>QR Scanner & QR Code</h1>
-    
-    <h2>QR Code Scanner</h2>
-    <video id="video"></video>
-    <button id="startCamera">Start Camera</button>
-    <button id="stopCamera">Stop Camera</button>
-    <button id="switchCamera">Switch Camera</button>
-    <button id="toggleFlash">Toggle Flash</button>
-    <p id="cam-status"></p>
-
-    <h2>QR Code</h2>
-    <div id="qrcode"></div>
-    <p><a id="qrcode-status" target="_parent"></a></p>
-    <button id="generateQRCode">Generate QR Code</button>
-
-    <script type="module">
-        const share_url = "{{share_url}}" || window.location.origin;
-        const conversation_id = "{{conversation_id}}";
-        if (!conversation_id) {
-            document.getElementById('generateQRCode')
-                .setAttribute('disabled', 'disabled');
-        }
-
-        import QrScanner from 'https://cdn.jsdelivr.net/npm/qr-scanner/qr-scanner.min.js';
+    <div class="container" style="width: 100%; height: 100vh; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="qrcode-container" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <div id="qrcode" style="padding: 10px; background-color: white; border-radius: 5px;"></div>
+            <a id="qrcode-status" style="margin-top: 10px; font-family: 'Courier New', monospace;" target="_blank"></a>
+        </div>
         
+        <div id="video-container" style="display: none; flex-direction: column; max-width: 100%;">
+            <video id="video" style="max-width: 100%; height: auto;" playsinline></video>
+            <div style="display: flex; gap: 8px; margin-top: 10px; justify-content: center;">
+                <button id="stopCamera">停止相机</button>
+                <button id="switchCamera">切换相机</button>
+                <button id="toggleFlash">开关闪光灯</button>
+            </div>
+            <div id="camStatus" style="margin-top: 10px;"></div>
+        </div>
+        
+        <div style="display: flex; gap: 8px; margin-top: 20px;">
+            <button id="generateQRCode" style="padding: 8px 16px;">生成二维码</button>
+            <button id="startCamera" style="padding: 8px 16px;">扫描二维码</button>
+        </div>
+    </div>
+    <script src="/static/js/qrcode.min.js"></script>
+    <script src="/static/js/qr-scanner.min.js"></script>
+    <script>
+        const conversation_id = window.location.pathname.split('/')[2];
+        const share_url = window.location.origin;
         const videoElem = document.getElementById('video');
-        const camStatus = document.getElementById('cam-status');
+        const video_container = document.getElementById('video-container');
+        const camStatus = document.getElementById('camStatus');
+        let share_id = null;
+        let currentStream = null;
+        let facingMode = 'environment';
         let qrScanner;
 
         document.getElementById('stopCamera').addEventListener('click', () => {
@@ -59,11 +63,11 @@
                 if (hasFlash) {
                     qrScanner.toggleFlash();
                 } else {
-                    alert('Flash not supported on this camera.');
+                    alert('此相机不支持闪光灯。');
                 }
             }
         });
-        let share_id = null;
+        
         document.getElementById('generateQRCode').addEventListener('click', async () => {
             if (share_id) {
                 const delete_url = `${share_url}/backend-api/v2/files/${encodeURI(share_id)}`;
@@ -82,7 +86,7 @@
             const share = `${share_url}/chat/${encodeURI(share_id)}/${encodeURI(conversation_id)}`;
             const qrcodeStatus = document.getElementById('qrcode-status');
             if (response.status !== 200) {
-                qrcodeStatus.innerText = 'Error generating QR code: ' + response.statusText;
+                qrcodeStatus.innerText = '生成二维码时出错: ' + response.statusText;
                 return;
             }
             qrcodeStatus.innerText = share;
@@ -101,9 +105,7 @@
         });
 
         const switchButton = document.getElementById('switchCamera');
-        let currentStream = null;
-        let facingMode = 'environment';
-
+        
         async function startCamera() {
             try {
                 if (currentStream) {
@@ -123,10 +125,11 @@
                 currentStream = stream;
                 video.srcObject = stream;
                 video.play();
+                video_container.style.display = 'flex';
 
                 qrScanner = new QrScanner(videoElem, result => {
-                    camStatus.innerText = 'Camera Success: ' + result.data;
-                    console.log('decoded QR code:', result);
+                    camStatus.innerText = '扫描成功: ' + result.data;
+                    console.log('扫描到二维码:', result);
                     if (result.data.startsWith(share_url)) {
                         window.parent.location = result.data;
                     }
@@ -136,8 +139,8 @@
                 });
                 await qrScanner.start();
             } catch (error) {
-                console.error('Error accessing the camera:', error);
-                alert(`Could not access the camera: ${error.message}`);
+                console.error('访问相机时出错:', error);
+                alert(`无法访问相机: ${error.message}`);
             }
         }
 

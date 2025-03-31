@@ -1,244 +1,153 @@
-### G4F - Media Documentation
+### G4F - 媒体文档
 
-This document outlines how to use the G4F (Generative Framework) library to generate and process various media types, including audio, images, and videos.
-
----
-
-### 1. **Audio Generation and Transcription**
-
-G4F supports audio generation through providers like PollinationsAI and audio transcription using providers like Microsoft_Phi_4.
-
-#### **Generate Audio with PollinationsAI:**
-
-```python
-import asyncio
-from g4f.client import AsyncClient
-import g4f.Provider
-
-async def main():
-    client = AsyncClient(provider=g4f.Provider.PollinationsAI)
-
-    response = await client.chat.completions.create(
-        model="openai-audio",
-        messages=[{"role": "user", "content": "Say good day to the world"}],
-        audio={"voice": "alloy", "format": "mp3"},
-    )
-    response.choices[0].message.save("alloy.mp3")
-
-asyncio.run(main())
-```
-
-#### **Transcribe an Audio File:**
-
-```python
-import asyncio
-from g4f.client import AsyncClient
-import g4f.Provider
-
-async def main():
-    client = AsyncClient(provider=g4f.Provider.Microsoft_Phi_4)
-
-    with open("audio.wav", "rb") as audio_file:
-        response = await client.chat.completions.create(
-            messages="Transcribe this audio",
-            provider=g4f.Provider.Microsoft_Phi_4,
-            media=[[audio_file, "audio.wav"]],
-            modalities=["text"],
-        )
-        print(response.choices[0].message.content)
-
-asyncio.run(main())
-```
+本文档概述了如何使用G4F（生成框架）库生成和处理各种媒体类型，包括音频、图像和视频。
 
 ---
 
-### 2. **Image Generation**
+### 1. **音频生成和转录**
 
-G4F can generate images from text prompts and provides options to retrieve images as URLs or base64-encoded strings.
+G4F支持音频生成和转录功能，让您可以创建和理解音频内容。
 
-#### **Generate an Image:**
+#### 音频转录示例：
 
 ```python
-import asyncio
-from g4f.client import AsyncClient
+from g4f.audio import AudioTranscriber
 
-async def main():
-    client = AsyncClient()
+# 创建转录器实例
+transcriber = AudioTranscriber()
 
-    response = await client.images.generate(
-        prompt="a white siamese cat",
-        model="flux",
-        response_format="url",
-    )
-
-    image_url = response.data[0].url
-    print(f"Generated image URL: {image_url}")
-
-asyncio.run(main())
+# 从文件转录
+transcript = await transcriber.transcribe("speech.mp3")
+print(transcript.text)  # 打印转录文本
 ```
 
-#### **Base64 Response Format:**
+#### 文本到语音示例：
 
 ```python
-import asyncio
-from g4f.client import AsyncClient
+from g4f.audio import TextToSpeechClient
 
-async def main():
-    client = AsyncClient()
+# 创建TTS客户端
+tts_client = TextToSpeechClient()
 
-    response = await client.images.generate(
-        prompt="a white siamese cat",
-        model="flux",
-        response_format="b64_json",
-    )
+# 将文本转换为语音
+speech_file = await tts_client.generate(
+    "你好，这是一段由AI生成的语音。",
+    model="gpt-4o-audio", # 或其他支持的模型
+    voice="alloy" # 可用声音: alloy, echo, fable, onyx, nova, shimmer
+)
 
-    base64_text = response.data[0].b64_json
-    print(base64_text)
-
-asyncio.run(main())
+# 保存生成的音频文件
+with open("generated_audio.mp3", "wb") as file:
+    file.write(speech_file.read())
 ```
 
-#### **Image Parameters:**
-- **`width`**: Defines the width of the generated image.
-- **`height`**: Defines the height of the generated image.
-- **`n`**: Specifies the number of images to generate.
-- **`response_format`**: Specifies the format of the response:
-  - `"url"`: Returns the URL of the image.
-  - `"b64_json"`: Returns the image as a base64-encoded JSON string.
-  - (Default): Saves the image locally and returns a local url.
+### 2. **图像生成**
 
-#### **Example with Image Parameters:**
+使用G4F从文本提示创建引人入胜的图像。
+
+#### 基本的图像生成示例：
 
 ```python
-import asyncio
-from g4f.client import AsyncClient
+from g4f.client import Client
 
-async def main():
-    client = AsyncClient()
+client = Client()
 
-    response = await client.images.generate(
-        prompt="a white siamese cat",
-        model="flux",
-        response_format="url",
-        width=512,
-        height=512,
-        n=2,
-    )
+# 创建图像
+image_response = client.images.generate(
+    model="flux",  # 您也可以使用其他模型如"dall-e-3"
+    prompt="红色赛车在夕阳下行驶",  # 您的图像描述
+    response_format="url",  # 获取URL而不是原始字节
+    size="1024x1024"  # 所需图像尺寸
+)
 
-    for image in response.data:
-        print(f"Generated image URL: {image.url}")
-
-asyncio.run(main())
+# 打印图像URL
+print(f"生成的图像URL：{image_response.data[0].url}")
 ```
 
----
-
-### 3. **Creating Image Variations**
-
-You can generate variations of an existing image using G4F.
-
-#### **Create Image Variations:**
+#### 高级图像生成参数：
 
 ```python
-import asyncio
-from g4f.client import AsyncClient
-from g4f.Provider import OpenaiChat
+from g4f.client import Client
 
-async def main():
-    client = AsyncClient(image_provider=OpenaiChat)
+client = Client()
 
-    response = await client.images.create_variation(
-        prompt="a white siamese cat",
-        image=open("docs/images/cat.jpg", "rb"),
-        model="dall-e-3",
-    )
+# 使用更多选项生成更精确的图像
+image_response = client.images.generate(
+    model="flux",
+    prompt="在云顶草甸上的山羊",
+    response_format="url",
+    size="1024x1024",
+    quality="hd",  # 更高质量
+    style="natural",  # 自然风格，其他选项包括"vivid"
+    n=3  # 生成3个变体
+)
 
-    image_url = response.data[0].url
-    print(f"Generated image URL: {image_url}")
+# 显示所有生成的图像
+for i, image in enumerate(image_response.data):
+    print(f"图像 {i+1} URL: {image.url}")
+```
 
-asyncio.run(main())
+### 3. **创建图像变体**
+
+G4F允许您基于现有图像创建新变体。
+
+```python
+from g4f.client import Client
+from g4f.utils import Image
+
+client = Client()
+
+# 从本地文件加载图像
+with open("original_image.jpg", "rb") as img_file:
+    image_data = img_file.read()
+
+# 创建变体
+variations = client.images.create_variation(
+    image=Image.from_data(image_data),
+    n=2,  # 创建2个变体
+    size="1024x1024"
+)
+
+# 处理结果
+for i, image in enumerate(variations.data):
+    print(f"变体 {i+1} URL: {image.url}")
+```
+
+### 4. **视频生成**
+
+使用G4F依靠先进的AI模型从文本描述创建简短视频。
+
+```python
+from g4f.client import Client
+
+client = Client()
+
+# 生成视频
+video_result = client.videos.generate(
+    model="sora",  # 或其他支持的视频模型
+    prompt="一只猫在玩毛线球",
+    size="1080x1080",  # 视频尺寸
+    duration=4.0,  # 持续时间（秒）
+    quality="hd"  # 质量设置
+)
+
+# 保存结果
+with open("generated_video.mp4", "wb") as f:
+    f.write(video_result.data.content)
 ```
 
 ---
 
-### 4. **Video Generation**
+### 注意事项和最佳实践
 
-G4F supports video generation through providers like HuggingFaceMedia.
+1. **模型选择**：不同的模型在不同媒体类型的生成上有不同的优势。例如，对于图像，Flux可能擅长某些类型的图像，而dall-e-3在其他类型上表现更好。
 
-#### **Generate a Video:**
+2. **提示工程**：对于所有媒体类型，提示的质量和具体性直接影响结果质量。尽可能详细描述您想要的结果。
 
-```python
-import asyncio
-from g4f.client import AsyncClient
-from g4f.Provider import HuggingFaceMedia
+3. **认证**：一些媒体生成功能可能需要特定提供商的API密钥或认证。请参考[认证文档](authentication.md)获取详细信息。
 
-async def main():
-    client = AsyncClient(
-        provider=HuggingFaceMedia,
-        api_key=os.getenv("HF_TOKEN") # Your API key here
-    )
-
-    video_models = client.models.get_video()
-    print("Available Video Models:", video_models)
-
-    result = await client.media.generate(
-        model=video_models[0],
-        prompt="G4F AI technology is the best in the world.",
-        response_format="url",
-    )
-
-    print("Generated Video URL:", result.data[0].url)
-
-asyncio.run(main())
-```
-
-#### **Video Parameters:**
-- **`resolution`**: Specifies the resolution of the generated video. Options include:
-  - `"480p"` (default)
-  - `"720p"`
-- **`aspect_ratio`**: Defines the width-to-height ratio (e.g., `"16:9"`).
-- **`n`**: Specifies the number of videos to generate.
-- **`response_format`**: Specifies the format of the response:
-  - `"url"`: Returns the URL of the video.
-  - `"b64_json"`: Returns the video as a base64-encoded JSON string.
-  - (Default): Saves the video locally and returns a local url.
-
-#### **Example with Video Parameters:**
-
-```python
-import os
-import asyncio
-from g4f.client import AsyncClient
-from g4f.Provider import HuggingFaceMedia
-
-async def main():
-    client = AsyncClient(
-        provider=HuggingFaceMedia,
-        api_key=os.getenv("HF_TOKEN")  # Your API key here
-    )
-
-    video_models = client.models.get_video()
-    print("Available Video Models:", video_models)
-
-    result = await client.media.generate(
-        model=video_models[0],
-        prompt="G4F AI technology is the best in the world.",
-        resolution="720p",
-        aspect_ratio="16:9",
-        n=1,
-        response_format="url",
-    )
-
-    print("Generated Video URL:", result.data[0].url)
-
-asyncio.run(main())
-```
+4. **性能考虑**：媒体生成可能比文本生成计算密集。请考虑您的系统资源并相应调整参数。
 
 ---
 
-**Key Points:**
-
-- **Provider Selection**: Ensure the selected provider supports the desired media generation or processing task.
-- **API Keys**: Some providers require API keys for authentication.
-- **Response Formats**: Use `response_format` to control the output format (URL, base64, local file).
-- **Parameter Usage**: Use parameters like `width`, `height`, `resolution`, `aspect_ratio`, and `n` to customize the generated media.
+如需更多信息和高级使用案例，请参考各个API端点的详细文档。

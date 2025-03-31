@@ -4,21 +4,21 @@
 
 <p align="center">
   <span style="background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-    <strong>Written by <a href="https://github.com/xtekky">@xtekky</a></strong>
+    <strong>作者 <a href="https://github.com/xtekky">@xtekky</a></strong>
   </span>
 </p>
 
 <div id="top"></div>
 
-> [!IMPORTANT]
-> By using this repository or any code related to it, you agree to the [legal notice](LEGAL_NOTICE.md). The author is **not responsible for the usage of this repository nor endorses it**, nor is the author responsible for any copies, forks, re-uploads made by other users, or anything else related to GPT4Free. This is the author's only account and repository. To prevent impersonation or irresponsible actions, please comply with the GNU GPL license this Repository uses.
+> [!重要提示]
+> 使用本存储库或任何相关代码，即表示您同意[法律声明](LEGAL_NOTICE.md)。本仓库的作者**不对使用承担责任，也不认可**该仓库，也不对任何副本、分支、其他用户重新上传或任何其他与GPT4Free相关的内容负责。这是作者的唯一账号和存储库。为防止冒充或不负责任的行为，请遵守本存储库使用的GNU GPL许可证。
 
-> [!WARNING]
-> _"gpt4free"_ serves as a **PoC** (proof of concept), demonstrating the development of an API package with multi-provider requests, with features like timeouts, load balance and flow control.
+> [!警告]
+> _"gpt4free"_ 是一个**概念验证(PoC)**，展示了具有多提供商请求功能的API包的开发，包括超时、负载均衡和流量控制等功能。
 
-> [!NOTE]
-> <sup><strong>Latest version:</strong></sup><br> [![PyPI version](https://img.shields.io/pypi/v/g4f?color=blue)](https://pypi.org/project/g4f) [![Docker version](https://img.shields.io/docker/v/hlohaus789/g4f?label=docker&color=blue)](https://hub.docker.com/r/hlohaus789/g4f)  
-> <sup><strong>Stats:</strong></sup><br> [![Downloads](https://static.pepy.tech/badge/g4f)](https://pepy.tech/project/g4f) [![Downloads](https://static.pepy.tech/badge/g4f/month)](https://pepy.tech/project/g4f)
+> [!注意]
+> <sup><strong>最新版本:</strong></sup><br> [![PyPI version](https://img.shields.io/pypi/v/g4f?color=blue)](https://pypi.org/project/g4f) [![Docker version](https://img.shields.io/docker/v/hlohaus789/g4f?label=docker&color=blue)](https://hub.docker.com/r/hlohaus789/g4f)  
+> <sup><strong>统计数据:</strong></sup><br> [![Downloads](https://static.pepy.tech/badge/g4f)](https://pepy.tech/project/g4f) [![Downloads](https://static.pepy.tech/badge/g4f/month)](https://pepy.tech/project/g4f)
 
 ```sh
 pip install -U g4f[all]
@@ -28,25 +28,25 @@ pip install -U g4f[all]
 docker pull hlohaus789/g4f
 ```
 
-## 🆕 What's New
+## 🆕 最新动态
 
 ![1000032415](https://github.com/user-attachments/assets/4caab977-eb05-48ed-b750-3ad082bcfcae)
 
-- **Explore the latest features and updates**  
-  Find comprehensive details on our [Releases Page](https://github.com/xtekky/gpt4free/releases).  
+- **探索最新功能和更新**  
+  在[发布页面](https://github.com/xtekky/gpt4free/releases)查看全面详情。  
 
-- **Stay updated with our Telegram Channel** 📨  
-  Join us at [telegram.me/g4f_channel](https://telegram.me/g4f_channel).
+- **关注我们的Telegram频道** 📨  
+  加入[telegram.me/g4f_channel](https://telegram.me/g4f_channel)。
   
-- **Subscribe to our Discord News Channel** 💬🆕️  
-  Stay informed about updates via our [News Channel: discord.gg/5E39JUWUFa](https://discord.gg/5E39JUWUFa).
+- **订阅Discord新闻频道** 💬🆕️  
+  通过[Discord新闻频道: discord.gg/5E39JUWUFa](https://discord.gg/5E39JUWUFa)了解更新。
   
-- **Get support in our Discord Community** 🤝💻  
-  Reach out for help in our [Support Group: discord.gg/qXA4Wf4Fsm](https://discord.gg/qXA4Wf4Fsm).
+- **在Discord社区获取支持** 🤝💻  
+  通过[支持群组: discord.gg/qXA4Wf4Fsm](https://discord.gg/qXA4Wf4Fsm)获取帮助。
 
-## 🔻 Site Takedown
+## 🔻 网站下线
 
-Is your site on this repository and you want to take it down? Send an email to takedown@g4f.ai with proof it is yours and it will be removed as fast as possible. To prevent reproduction please secure your API. 😉
+如果您的站点在本仓库中且您想将其下线，请发送电子邮件至takedown@g4f.ai并提供证明其属于您的证据，我们将尽快移除。为防止重新出现，请保护您的API。😉
 
 ## 🚀 GPT4Free on HuggingFace
 [![HuggingSpace](https://github.com/user-attachments/assets/1d859e8a-d6fa-416f-a213-ccc26aa11e90)](https://huggingface.co/spaces/roxky/g4f-new)
@@ -60,28 +60,28 @@ Is your site on this repository and you want to take it down? Send an email to t
 
 ---
 
-## 📚 Table of Contents
-   - [🆕 What's New](#-whats-new)
-   - [📚 Table of Contents](#-table-of-contents)
-   - [⚡ Getting Started](#-getting-started)
-      - [🛠 Installation](#-installation)
-         - [🐳 Using Docker](#-using-docker)
-         - [🪟 Windows Guide (.exe)](#-windows-guide-exe)
-         - [🐍 Python Installation](#-python-installation)
-  - [💡 Usage](#-usage)
-     - [📝 Text Generation](#-text-generation)
-     - [🎨 Image Generation](#-image-generation)
-     - [🌐 Web Interface](#-web-interface)
-     - [🖥️ Local Inference](docs/local.md)
-     - [🤖 Interference API](#-interference-api)
-     - [🛠️ Configuration](docs/configuration.md)
-     - [📱 Run on Smartphone](#-run-on-smartphone)
-     - [📘 Full Documentation for Python API](#-full-documentation-for-python-api)
+## 📚 目录
+   - [🆕 最新动态](#-最新动态)
+   - [📚 目录](#-目录)
+   - [⚡️ 开始使用](#-开始使用)
+      - [🛠 安装](#-安装)
+         - [🐳 使用Docker](#-使用docker)
+         - [🪟 Windows指南(.exe)](#-windows指南exe)
+         - [🐍 Python安装](#-python安装)
+  - [💡 使用方法](#-使用方法)
+     - [📝 文本生成](#-文本生成)
+     - [🎨 图像生成](#-图像生成)
+     - [🌐 Web界面](#-web界面)
+     - [🖥️ 本地推理](docs/local.md)
+     - [🤖 接口API](#-接口api)
+     - [🛠️ 配置](docs/configuration.md)
+     - [📱 在智能手机上运行](#-在智能手机上运行)
+     - [📘 Python API完整文档](#-python-api完整文档)
   - [🚀 Providers and Models](docs/providers-and-models.md)
   - [🔗 Powered by gpt4free](#-powered-by-gpt4free)
   - [🤝 Contribute](#-contribute)
-     - [How do i create a new Provider?](#guide-how-do-i-create-a-new-provider)
-     - [How can AI help me with writing code?](#guide-how-can-ai-help-me-with-writing-code)
+     - [如何创建新的提供商?](#guide-如何创建新的提供商)
+     - [AI如何帮助我编写代码?](#guide-ai如何帮助我编写代码)
    - [🙌 Contributors](#-contributors)
    - [©️ Copyright](#-copyright)
   - [⭐ Star History](#-star-history)
@@ -89,18 +89,18 @@ Is your site on this repository and you want to take it down? Send an email to t
 
 ---
 
-## ⚡️ Getting Started
+## ⚡️ 开始使用
 
-## 🛠 Installation
+## 🛠 安装
 
-### 🐳 Using Docker
-1. **Install Docker:** [Download and install Docker](https://docs.docker.com/get-docker/).
-2. **Set Up Directories:** Before running the container, make sure the necessary data directories exist or can be created. For example, you can create and set ownership on these directories by running: 
+### 🐳 使用Docker
+1. **安装Docker:** [下载并安装Docker](https://docs.docker.com/get-docker/)。
+2. **设置目录:** 在运行容器之前，请确保必要的数据目录存在或可以创建。例如，您可以通过运行以下命令创建并设置这些目录的所有权：
 ```bash
 mkdir -p ${PWD}/har_and_cookies ${PWD}/generated_images
 sudo chown -R 1200:1201 ${PWD}/har_and_cookies ${PWD}/generated_images
 ```
-3. **Run the Docker Container:** Use the following commands to pull the latest image and start the container (Only x64):
+3. **运行Docker容器:** 使用以下命令拉取最新镜像并启动容器（仅x64）：
 ```bash
 docker pull hlohaus789/g4f
 docker run -p 8080:8080 -p 7900:7900 \
@@ -110,7 +110,7 @@ docker run -p 8080:8080 -p 7900:7900 \
   hlohaus789/g4f:latest
 ```
 
-4. **Running the Slim Docker Image:** And use the following commands to run the Slim Docker image. This command also updates the `g4f` package at startup and installs any additional dependencies: (x64 and arm64)
+4. **运行Slim Docker镜像:** 使用以下命令运行Slim Docker镜像。此命令还会在启动时更新`g4f`包并安装任何其他依赖项：（x64和arm64）
 ```bash
 mkdir -p ${PWD}/har_and_cookies ${PWD}/generated_images
 chown -R 1000:1000 ${PWD}/har_and_cookies ${PWD}/generated_images
@@ -124,55 +124,55 @@ docker run \
   && python -m g4f --debug
 ```
  
-5. **Access the Client Interface:**
-   - **To use the included client, navigate to:** [http://localhost:8080/chat/](http://localhost:8080/chat/)
-   - **Or set the API base for your client to:** [http://localhost:8080/v1](http://localhost:8080/v1)
+5. **访问客户端界面:**
+   - **要使用包含的客户端，请访问:** [http://localhost:8080/chat/](http://localhost:8080/chat/)
+   - **或将客户端的API基础设置为:** [http://localhost:8080/v1](http://localhost:8080/v1)
 
-6. **(Optional) Provider Login:**
-   If required, you can access the container's desktop here: http://localhost:7900/?autoconnect=1&resize=scale&password=secret for provider login purposes.
-
----
-
-### 🪟 Windows Guide (.exe)
-To ensure the seamless operation of our application, please follow the instructions below. These steps are designed to guide you through the installation process on Windows operating systems.
-
-**Installation Steps:**
-1. **Download the Application**: Visit our [releases page](https://github.com/xtekky/gpt4free/releases/tag/0.4.2.0) and download the most recent version of the application, named `g4f.exe.zip`.
-2. **File Placement**: After downloading, locate the `.zip` file in your Downloads folder. Unpack it to a directory of your choice on your system, then execute the `g4f.exe` file to run the app.
-3. **Open GUI**: The app starts a web server with the GUI. Open your favorite browser and navigate to [http://localhost:8080/chat/](http://localhost:8080/chat/) to access the application interface.
-4. **Firewall Configuration (Hotfix)**: Upon installation, it may be necessary to adjust your Windows Firewall settings to allow the application to operate correctly. To do this, access your Windows Firewall settings and allow the application.
-
-By following these steps, you should be able to successfully install and run the application on your Windows system. If you encounter any issues during the installation process, please refer to our Issue Tracker or try to get contact over Discord for assistance.
+6. **（可选）提供商登录:**
+   如果需要，您可以在此处访问容器的桌面：http://localhost:7900/?autoconnect=1&resize=scale&password=secret 以进行提供商登录。
 
 ---
 
-### 🐍 Python Installation
+### 🪟 Windows指南(.exe)
+为了确保我们的应用程序能够顺利运行，请按照以下说明进行操作。这些步骤旨在指导您在Windows操作系统上完成安装过程。
 
-#### Prerequisites:
-1. Install Python 3.10+ from [python.org](https://www.python.org/downloads/).
-2. Install Google Chrome for certain providers.
+**安装步骤:**
+1. **下载应用程序:** 访问我们的[发布页面](https://github.com/xtekky/gpt4free/releases/tag/0.4.2.0)并下载最新版本的应用程序，名为`g4f.exe.zip`。
+2. **文件放置:** 下载后，在您的下载文件夹中找到`.zip`文件。将其解压缩到您系统上选择的目录，然后执行`g4f.exe`文件以运行应用程序。
+3. **打开GUI:** 该应用程序启动一个带有GUI的Web服务器。打开您喜欢的浏览器并导航到[http://localhost:8080/chat/](http://localhost:8080/chat/)以访问应用程序界面。
+4. **防火墙配置（热修复）:** 安装后，可能需要调整Windows防火墙设置以允许应用程序正常运行。为此，请访问Windows防火墙设置并允许应用程序。
 
-#### Install with PyPI:
+通过遵循这些步骤，您应该能够成功在Windows系统上安装和运行应用程序。如果在安装过程中遇到任何问题，请参阅我们的问题跟踪器或尝试通过Discord获取帮助。
+
+---
+
+### 🐍 Python安装
+
+#### 先决条件:
+1. 从[python.org](https://www.python.org/downloads/)安装Python 3.10+。
+2. 为某些提供商安装Google Chrome。
+
+#### 使用PyPI安装:
 ```bash
 pip install -U g4f[all]
 ```
 
-> How do I install only parts or do disable parts? **Use partial requirements:** [/docs/requirements](docs/requirements.md)
+> 如何仅安装部分或禁用部分？**使用部分需求:** [/docs/requirements](docs/requirements.md)
 
-#### Install from Source:
+#### 从源代码安装:
 ```bash
 git clone https://github.com/xtekky/gpt4free.git
 cd gpt4free
 pip install -r requirements.txt
 ```
 
-> How do I load the project using git and installing the project requirements? **Read this tutorial and follow it step by step:** [/docs/git](docs/git.md)
+> 如何使用git加载项目并安装项目需求？**阅读本教程并按步骤操作:** [/docs/git](docs/git.md)
 
 ---
 
-## 💡 Usage
+## 💡 使用方法
 
-### 📝 Text Generation
+### 📝 文本生成
 ```python
 from g4f.client import Client
 
@@ -188,7 +188,7 @@ print(response.choices[0].message.content)
 Hello! How can I assist you today?
 ```
 
-### 🎨  Image Generation
+### 🎨 图像生成
 ```python
 from g4f.client import Client
 
@@ -203,52 +203,52 @@ print(f"Generated image URL: {response.data[0].url}")
 ```
 [![Image with cat](/docs/images/cat.jpeg)](docs/client.md)
 
-### 🌐 Web Interface
-**Run the GUI using Python:**
+### 🌐 Web界面
+**使用Python运行GUI:**
 ```python
 from g4f.gui import run_gui
 
 run_gui()
 ```
-**Run via CLI (To start the Flask Server):**
+**通过CLI运行（启动Flask服务器）:**
 ```bash
 python -m g4f.cli gui --port 8080 --debug
 ```
-**Or, start the FastAPI Server:**
+**或者，启动FastAPI服务器:**
 ```bash
 python -m g4f --port 8080 --debug
 ```
 
-> **Learn More About the GUI:** For detailed instructions on how to set up, configure, and use the GPT4Free GUI, refer to the [GUI Documentation](docs/gui.md) . This guide includes step-by-step details on provider selection, managing conversations, using advanced features like speech recognition, and more.
+> **了解更多关于GUI的信息:** 有关如何设置、配置和使用GPT4Free GUI的详细说明，请参阅[GUI文档](docs/gui.md)。本指南包括提供商选择、管理对话、使用高级功能（如语音识别）等的详细步骤。
 
 ---
 
-### 🤖 Interference API
+### 🤖 接口API
 
-The **Interference API** enables seamless integration with OpenAI's services through G4F, allowing you to deploy efficient AI solutions.
+**接口API**通过G4F实现与OpenAI服务的无缝集成，使您能够部署高效的AI解决方案。
 
-- **Documentation**: [Interference API Docs](docs/interference-api.md)
-- **Endpoint**: `http://localhost:1337/v1`
-- **Swagger UI**: Explore the OpenAPI documentation via Swagger UI at `http://localhost:1337/docs`
-- **Provider Selection**: [How to Specify a Provider?](docs/selecting_a_provider.md)
+- **文档:** [接口API文档](docs/interference-api.md)
+- **端点:** `http://localhost:1337/v1`
+- **Swagger UI:** 通过Swagger UI在`http://localhost:1337/docs`浏览OpenAPI文档
+- **提供商选择:** [如何指定提供商?](docs/selecting_a_provider.md)
 
-This API is designed for straightforward implementation and enhanced compatibility with other OpenAI integrations.
-
----
-
-### 📱 Run on Smartphone
-Run the Web UI on your smartphone for easy access on the go. Check out the dedicated guide to learn how to set up and use the GUI on your mobile device: [Run on Smartphone Guide](docs/guides/phone.md)
+此API设计为简便实施，并增强与其他OpenAI集成的兼容性。
 
 ---
 
-#### **📘 Full Documentation for Python API**
-   - **Client API from G4F:** [/docs/client](docs/client.md)
-   - **AsyncClient API from G4F:** [/docs/async_client](docs/async_client.md)
-   - **Requests API from G4F:** [/docs/requests](docs/requests.md)
-   - **File API from G4F:** [/docs/file](docs/file.md)
-   - **PydanticAI and LangChain Integration for G4F:** [/docs/pydantic_ai](docs/pydantic_ai.md)
-   - **Legacy API with python modules:** [/docs/legacy](docs/legacy.md)
-   - **G4F - Media Documentation** [/docs/media](/docs/media.md) *(New)*
+### 📱 在智能手机上运行
+在智能手机上运行Web UI，方便随时随地访问。查看专门的指南，了解如何设置和使用手机上的GUI：[在智能手机上运行指南](docs/guides/phone.md)
+
+---
+
+#### **📘 Python API完整文档**
+   - **G4F的客户端API:** [/docs/client](docs/client.md)
+   - **G4F的AsyncClient API:** [/docs/async_client](docs/async_client.md)
+   - **G4F的Requests API:** [/docs/requests](docs/requests.md)
+   - **G4F的File API:** [/docs/file](docs/file.md)
+   - **G4F的PydanticAI和LangChain集成:** [/docs/pydantic_ai](docs/pydantic_ai.md)
+   - **使用python模块的旧版API:** [/docs/legacy](docs/legacy.md)
+   - **G4F - 媒体文档** [/docs/media](/docs/media.md) *(新)*
 
 ---
 
@@ -715,11 +715,11 @@ Run the Web UI on your smartphone for easy access on the go. Check out the dedic
 ## 🤝 Contribute
 We welcome contributions from the community. Whether you're adding new providers or features, or simply fixing typos and making small improvements, your input is valued. Creating a pull request is all it takes – our co-pilot will handle the code review process. Once all changes have been addressed, we'll merge the pull request into the main branch and release the updates at a later time.
 
-###### Guide: How do i create a new Provider?
-   - **Read:** [Create Provider Guide](docs/guides/create_provider.md)
+###### Guide: 如何创建新的提供商?
+   - **阅读:** [创建提供商指南](docs/guides/create_provider.md)
 
-###### Guide: How can AI help me with writing code?
-   - **Read:** [AI Assistance Guide](docs/guides/help_me.md)
+###### Guide: AI如何帮助我编写代码?
+   - **阅读:** [AI帮助指南](docs/guides/help_me.md)
 
 
 
